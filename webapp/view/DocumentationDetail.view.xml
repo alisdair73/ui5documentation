@@ -1,0 +1,401 @@
+<mvc:View
+	controllerName="org.at.UI5Documentation.controller.DocumentationDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m"
+>
+	<Page
+		title="Application Details"
+		busy="{detailHelper>/busy}"
+		busyIndicatorDelay="{detailHelper>/delay}"
+		backgroundDesign="Solid"
+	>
+		<content>
+			<ObjectHeader
+				title="{Description}"
+				titleLevel="H1"
+				backgroundDesign="Solid"
+			>
+				<attributes>
+					<ObjectAttribute title="UI5 Component" text="{ComponentID}"/>
+					<ObjectAttribute title="ABAP Package" text="{PackageName} - {PackageDescription}"/>
+				</attributes>
+			</ObjectHeader>
+
+			<IconTabBar
+				class="sapUiSmallMarginBottom sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter text="Application Information">
+						<l:VerticalLayout>
+							<Table class="sapUiMediumMarginTop">
+								<headerToolbar>								
+									<Toolbar>
+										<content>
+											<Title text="SAPUI5 Application" level="H2"/>
+										</content>
+									</Toolbar>
+								</headerToolbar>							
+								<columns>
+									<Column>
+										<Text text="Component" />
+									</Column>
+									<Column>
+										<Text text="Technical Name" />
+									</Column>
+									<Column>
+										<Text text="Path to ICF Node" />
+									</Column>
+									<Column>
+										<Text text="SAP UI5 Component" />
+									</Column>									
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="SAP UI5 Application" />
+											<Text text="{BSPApplication}"/>
+											<Text text="{UI5URI}"/>
+											<Text text="{ComponentID}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>	
+						</l:VerticalLayout>
+					</IconTabFilter>
+					<IconTabFilter text="Implementation Details">
+						<Panel expandable="true" expanded="false" headerText="OData Service(s)" width="auto" class="sapUiResponsiveMargin">
+							<l:VerticalLayout>
+								<Table id="idProductsTable"
+									inset="false"
+									items="{Services}"
+								>
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<Title text="Services" level="H2"/>
+												<ToolbarSpacer />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column mergeDuplicates="true">
+											<Text text="Service" />
+										</Column>
+										<Column>
+											<Text text="Version" />
+										</Column>
+										<Column>
+											<Text text="Role" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{Name}" />
+												<Text text="{Version}"/>
+												<Text text="{Role}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:VerticalLayout>
+						</Panel>
+						<Panel expandable="true" expanded="false" headerText="Fiori Launchpad" width="auto" class="sapUiResponsiveMargin">
+							<l:VerticalLayout>
+								<Table items="{TargetMaps}"
+								>
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<Title text="Target Mapping(s)" level="H2"/>
+												<ToolbarSpacer />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column mergeDuplicates="true">
+											<Text text="Semantic Object" />
+										</Column>
+										<Column mergeDuplicates="true">
+											<Text text="Semantic Action" />
+										</Column>
+										<Column>
+											<Text text="Parameter Key" />
+										</Column>
+										<Column>
+											<Text text="Parameter Value" />
+										</Column>								
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{Object}" />
+												<Text text="{Action}"/>
+												<Text text="{ParameterKey}"/>
+												<Text text="{ParameterValue}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiMediumMarginTop">
+								<Table items="{Tiles}"
+								>
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<Title text="App Launcher(s)" level="H2"/>
+												<ToolbarSpacer />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column mergeDuplicates="true">
+											<Text text="Title" />
+										</Column>
+										<Column>
+											<Text text="Subtitle" />
+										</Column>
+										<Column>
+											<Text text="Information" />
+										</Column>
+										<Column>
+											<Text text="Parameter-Value" />
+										</Column>								
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{Title}" />
+												<Text text="{Subtitle}"/>
+												<Text text="{Information}"/>
+												<Text text="{ParameterValue}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>	
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiMediumMarginTop">
+								<Table items="{Catalogs}" 
+								>
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<Title text="Business Catalog(s)" level="H2"/>
+												<ToolbarSpacer />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column>
+											<Text text="Catalog Name" />
+										</Column>
+										<Column>
+											<Text text="Catalog Description" />
+										</Column>
+										<Column width="5em">
+											<Text text="Ref." />
+										</Column>
+										<Column width="5em">
+											<Text text="Tile?" />
+										</Column>
+										<Column width="5em">
+											<Text text="Target?" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Link text="{ID}" press="showComponentsForCatalog"/>
+												<Text text="{Name}"/>
+												<core:Icon src="{Reference}"/>
+												<core:Icon src="{Tile}"/>
+												<core:Icon src="{TargetMap}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiMediumMarginTop">
+								<Table items="{Groups}">
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<Title text="Business Group(s)" level="H2"/>
+												<ToolbarSpacer />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column>
+											<Text text="Business Group" />
+										</Column>
+										<Column>
+											<Text text="Group Description" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{ID}"/>
+												<Text text="{Name}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:VerticalLayout>								
+							<l:VerticalLayout class="sapUiMediumMarginTop">
+								<Table items="{Roles}">
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<Title text="Business Role(s)" level="H2"/>
+												<ToolbarSpacer />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column>
+											<Text text="Role Name" />
+										</Column>
+										<Column>
+											<Text text="Role Description" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Link text="{RoleName}" press="showComponentsForRole"/>
+												<Text text="{Description}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:VerticalLayout>
+						</Panel>
+					</IconTabFilter>
+					
+					<IconTabFilter text="ABAP Artefacts">
+						<l:VerticalLayout>
+							<Table items="{Artefacts}">
+								<headerToolbar>
+									<Toolbar>
+										<content>
+											<Title text="ABAP Artefact(s)" level="H2"/>
+											<ToolbarSpacer />
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column mergeDuplicates="true">
+										<Text text="Package" />
+									</Column>
+									<Column mergeDuplicates="true">
+										<Text text="Artefact Type" />
+									</Column>
+									<Column >
+										<Text text="Artefact Name" />
+									</Column>	
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<ObjectIdentifier title="{Package}" text="{PackageName}"/>
+											<Text text="{ArtefactType}"/>
+											<ObjectIdentifier title="{ArtefactName}" text="{ArtefactDescription}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</l:VerticalLayout>
+					</IconTabFilter>					
+					
+					<IconTabFilter text="CDS Artefacts">
+						<l:VerticalLayout>
+							<Table items="{CDSs}">
+								<headerToolbar>
+									<Toolbar>
+										<content>
+											<Title text="CDS Artefact(s)" level="H2"/>
+											<ToolbarSpacer />
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column mergeDuplicates="true">
+										<Text text="Package" />
+									</Column>
+									<Column mergeDuplicates="true">
+										<Text text="CDS Name" />
+									</Column>
+									<Column >
+										<Text text="Gateway Project" />
+									</Column>	
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<ObjectIdentifier title="{Package}" text="{PackageName}"/>
+											<ObjectIdentifier title="{CDSName}" text="{CDSDescription}"/>
+											<Text text="{GWProjectName}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</l:VerticalLayout>
+					</IconTabFilter>
+					
+					<IconTabFilter text="Transport History">
+						<l:VerticalLayout>
+							<Table items="{TransportRequests}">
+								<headerToolbar>
+									<Toolbar>
+										<content>
+											<Title text="Transport Request(s)" level="H2"/>
+											<ToolbarSpacer />
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column>
+										<Text text="Transport" />
+									</Column>
+									<Column>
+										<Text text="Project" />
+									</Column>
+									<Column width="10em">
+										<Text text="User Name" />
+									</Column>	
+									<Column width="7em">
+										<Text text="Released?" />
+									</Column>
+									<Column width="15em">
+										<Text text="Release On" />
+									</Column>	
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<ObjectIdentifier title="{RequestNumber}" text="{Description}"/>
+											<ObjectIdentifier title="{Project}" text="{ProjectName}"/>
+											<Text text="{UserName}"/>
+											<core:Icon src="{Released}"/>
+											<Text 
+												text="{
+													path : 'ReleasedOn', 
+            										type : 'sap.ui.model.type.DateTime',
+            										formatOptions: { style : 'medium'}
+            									}" 
+            								/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</l:VerticalLayout>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>			
+	</Page>
+</mvc:View>

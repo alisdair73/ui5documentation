@@ -1,0 +1,41 @@
+<mvc:View
+	controllerName="org.at.UI5Documentation.controller.DocumentationList"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+>
+	<Page 
+		title="{listHelper>/title}"
+	>
+		<content>
+			<Toolbar>
+				<SearchField 
+					showRefreshButton="true"
+					search="onSearch"
+				/>
+			</Toolbar>
+			<List
+				id="documentationList"
+				items="{
+					path: '/UI5Applications',
+					groupHeaderFactory: '.createGroupHeader'
+				}"
+				noDataText="No Documentation Found"
+				mode="SingleSelectMaster"
+				busyIndicatorDelay="{listHelper>/delay}"
+				updateFinished="onUpdateFinished"
+				selectionChange="onSelectionChange"
+				showSeparators="All"
+				
+			>
+				<items>
+					<StandardListItem
+						press="onSelectionChange"
+						title="{Description}"
+						description="{ComponentID}"
+						adaptTitleSize="true"
+					/>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>

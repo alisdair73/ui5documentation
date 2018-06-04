@@ -1,0 +1,16 @@
+<mvc:View
+	controllerName="org.at.UI5Documentation.controller.NoDocumentationSelected"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+>
+
+	<MessagePage
+		title="No Documentation Selected"
+		text="No Documentation Selected"
+		icon="{sap-icon://document}"
+		description=""
+		navButtonPress="onNavBack"
+	>
+	</MessagePage>
+
+</mvc:View>
